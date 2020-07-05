@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap.curulean-theme.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css">
+
+    <title>WYC QR CODE </title>
+
+<style>
+.panel-heading {
+	x-font-size: x-large;
+	font-size: 24px;
+	font-weight: 700;
+}
+body {
+	padding: 10px;
+}
+.hr-wide {
+	border-width: 3px;
+	border-color: #333;
+}
+</style>
+</head>
+<body>
+	<div class="page-header"><h1> WYC QR SERVER </h1></div>
+
+	<div class="content container">
+
+		<div>
+			<div class="row">
+				<div class="col-sm-10">
+					<div class="panel panel-info">
+						<div class="panel-heading"> Login </div>
+						<div class="panel-body">
+							<form class="is-form" id="form03" method="POST" action="http://127.0.0.1:8333/api/get-auth">
+								<div class="form-group ">
+									<label class="form-control-label">Username</label>
+									<input class="form-control" name="un" type="text">	   
+								</div>
+								<div class="form-group ">
+									<label class="form-control-label">Password</label>
+									<input class="form-control" name="pw" type="text">	   
+								</div>
+								<div class="form-group ">
+									<button class="btn btn-primary" type="submit">Login (Get Auth Token)</button> 
+								</div>
+								<input type="hidden" class="is-random-value" name="__ran__">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="hr-wide">
+
+		<div>
+			<div class="row">
+				<div class="col-sm-10">
+					<div class="panel panel-info">
+						<div class="panel-heading"> Generate QR </div>
+						<div class="panel-body">
+							<form class="is-form" id="form01" method="POST" action="http://127.0.0.1:8333/api/gen-qr">
+								<div class="form-group ">
+									<label class="form-control-label">Initial URL</label>
+									<input class="form-control" name="url" type="text">	   
+								</div>
+								<div class="form-group ">
+									<button class="btn btn-primary" type="submit">Generate QR Code Image</button> 
+								</div>
+								<input type="hidden" class="is-random-value" name="__ran__">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="hr-wide">
+
+		<div>
+			<div class="row">
+				<div class="col-sm-10">
+					<div class="panel panel-info">
+						<div class="panel-heading"> Lookup QR </div>
+						<div class="panel-body">
+							<form class="is-form" id="form02" method="POST" action="http://127.0.0.1:8333/api/lookup">
+								<div class="form-group ">
+									<label class="form-control-label">ID</label>
+									<input class="form-control" name="id" type="text">	   
+								</div>
+								<div class="form-group ">
+									<button class="btn btn-primary" type="submit">Lookup QR Data</button> 
+								</div>
+								<input type="hidden" class="is-random-value" name="__ran__">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="hr-wide">
+
+		<div>
+			<div class="row">
+				<div class="col-sm-10">
+					<div class="panel panel-info">
+						<div class="panel-heading"> Update QR Destination </div>
+						<div class="panel-body">
+							<form class="is-form" id="form04" method="POST" action="http://127.0.0.1:8333/api/upd-qr">
+								<div class="form-group ">
+									<label class="form-control-label">ID</label>
+									<input class="form-control" name="id" type="text">	   
+								</div>
+								<div class="form-group ">
+									<label class="form-control-label">Destination URL</label>
+									<input class="form-control" name="url" type="text">	   
+								</div>
+								<div class="form-group ">
+									<button class="btn btn-primary" type="submit">Update QR Destination</button> 
+								</div>
+								<input type="hidden" class="is-random-value" name="__ran__">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="hr-wide">
+
+		<div>
+			<div class="row">
+				<div class="col-sm-10">
+					<div class="panel panel-info">
+						<div class="panel-heading"> QR Count </div>
+						<div class="panel-body">
+							<form class="is-form" id="form05" method="POST" action="http://127.0.0.1:8333/api/count">
+								<div class="form-group ">
+									<label class="form-control-label">ID</label>
+									<input class="form-control" name="id" type="text">	   
+								</div>
+								<div class="form-group ">
+									<button class="btn btn-primary" type="submit">Get QR Count</button> 
+								</div>
+								<input type="hidden" class="is-random-value" name="__ran__">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class="hr-wide">
+
+<!--
+	http.HandleFunc("/Q", respHandlerRedirect)				form07
+	qr_encoded = data.qr_encoded;
+		/api/redirect-using?id=NNNN									form08
+		/api/redirect-using?png=xxx.png								form08
+-->
+
+
+
+
+		<div>
+			<div class="row">
+				<div class="col-sm-10">
+					<div class="panel panel-info">
+						<div class="panel-heading"> Output </div>
+						<div class="panel-body">
+							<pre id="output"></pre>
+						</div>
+						<div class="panel-body">
+							<span id="output_img"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+<script src="/js/cfg.js?_ran_=0221"></script>
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/popper-1.14.7.js"></script>
+<script>
+
+var auth_token = "";
+var qr_encoded = "";
+
+function URLStrToHash(query) {
+	var rv = {};
+	var decode = function (s) { return decodeURIComponent(s.replace(/^\?/,"").replace(/\+/g, " ")); };
+
+	var p1 = query.replace(/([^&=]+)=?([^&]*)/g,function(j,n,v){
+		n = decode(n);
+		v = decode(v);
+		if ( typeof(rv[n]) === "undefined" ) {
+			rv[n] = ( typeof v === "undefined" ) ? "" : v;
+		} else if ( typeof(rv[n]) === "string" ) {
+			var x = rv[n];
+			rv[n] = [];
+			rv[n].push ( x );
+			rv[n].push ( v );
+		} else {
+			rv[n].push ( v );
+		}
+		return "";
+	});
+	return rv;
+}
+
+var g_origin = window.location.origin;
+if ( ! g_origin ) {			// Probablyl running on Opera
+	g_origin = window.location.protocol + "//" + window.location.host;
+}
+
+var g_param = URLStrToHash ( window.location.search );
+
+// console.log ( window.location.search );
+// console.log ( "g_param=", g_param );
+
+function ConfiureAJAXCall() {
+	$.ajaxSetup({
+		beforeSend: function(xhr) {
+			if ( auth_token && auth_token !== "" ) {
+				// xhr.setRequestHeader('Authorization', 'bearer '+auth_token);
+				xhr.setRequestHeader('X-Auth', auth_token);
+			}
+		}
+		,dataFilter: function(data, type) {
+			var prefix = ['//', ')]}\'', 'while(1);', 'while(true);', 'for(;;);'], i, l, pos;
+
+			// console.log ( "dataFilter: data type", type );
+
+			if (type && type != 'json' && type != 'jsonp') {
+				return data;
+			}
+
+			// console.log ( "dataFilter: raw data before remove of prefix.", data );
+
+			var dl = data.length;	 // data length 
+			for (i = 0, l = prefix.length; i < l; i++) {
+				var pl = prefix[i].length; // pattern lenght
+				// console.log ( "dataFilter: raw substr -={" + data.substring(0,pl) + "}=-" );
+				if ( dl >= pl && data.substring(0,pl) === prefix[i] ) {
+					return data.substring(pl);
+				}
+			}
+			return data;
+		}
+	});
+}
+
+var remoteURL = g_origin;
+
+function submitIt ( event, id ) {
+	// console.log( "Handler for #"+id+".submit() called." );
+	event.preventDefault();
+
+	ConfiureAJAXCall() 
+
+	var frm = $('#'+id);
+	var action = frm.attr('action');
+	if ( remoteURL === "" ) {
+	} else {
+		action = action.substring("http://127.0.0.1:8333".length);
+		action = remoteURL + action
+		console.log ( "action after:", action );
+	}
+
+	$('.is-random-value').val(Math.random());		// Add cache burst random value for every form.
+
+	$.ajax({
+		type: frm.attr('method'),
+		url: action,
+		data: frm.serialize(),
+		success: function (data) {
+			console.log ( 'data=', data );	 // already parsed.
+			if ( data.status == "success" && data.auth_token ) {
+				auth_token = data.auth_token;
+			}
+			if ( data.status == "success" && data.qr_encoded ) {
+				qr_encoded = data.qr_encoded;
+			}
+			if ( data.status == "success" && data.qr_url ) {
+				$("#output_img").html('<img src="'+data.qr_url+'">');
+			}
+			if ( data.status && data.status != "success" ) {
+				alert ( data.msg );
+			}
+			$("#output").text( JSON.stringify(data, null, 4) );
+		},
+		error: function(resp) {
+			console.log("error=",resp);
+			alert("got error status="+resp.status+" "+resp.statusText);
+		}
+	});
+}
+
+$("#form01").submit(function( event ) { submitIt ( event, 'form01' ); });	// gen-qr
+$("#form02").submit(function( event ) { submitIt ( event, 'form02' ); });	// lookup
+$("#form03").submit(function( event ) { submitIt ( event, 'form03' ); });	// login
+$("#form04").submit(function( event ) { submitIt ( event, 'form04' ); });	// upd-qr
+$("#form05").submit(function( event ) { submitIt ( event, 'form05' ); });	// count
+
+</script>
+
+</body>
+</html>

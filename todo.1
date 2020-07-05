@@ -1,0 +1,145 @@
+
+1. Tests - ./qrtest/Makefile
+
+2. ./www/index.html 
+	- Login
+	- Create QR
+	- Use QR
+	- Lookup QR
+	- Get Count
+
+3. Documentation
+	README.md 
+
+tests
+	After get of QR - then do CURL to pull down the QR.png - verify get it.
+	Decode it and verify contents of it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done --
+-- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done --
+-- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done --
+-- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done -- -- done --
+
+/api/get-jwt?un=X&pw=Y -> jwt token
+	Lookup in redis qr-salt:X to get per-user salt
+	Lookup in Redis qr-un:X -> hash(salt:password) - compare to hash(salt:password)
+	Generate JWT token if valid - else 401
+/api/gen-qr?url=XXX - initial XXX url to set ID to, returns QR and ID as JSON
+/q/{ID}
+/api/upd-qr?id=ID&url=XXX
+/api/count?id=ID
+README.md
+
+
+1. Connect to REDIS
+2. Get "INCR" on key to work, check that key exists
+3. redis setup file.
+	1. qr:id_seq
+4. QR generator
+5. Dummy of Auth to work
+6. Tests for this.
+
+
+
+0. Redis Setup
+	qr-setup: if not found then create stuff
+
+
+	* http.HandleFunc("/Q", respHandlerRedirect)
+	* http.HandleFunc("/api/lookup", respHandlerLookup)
+	* http.HandleFunc("/api/upd-qr", respHandlerUpdQR)
+	* http.HandleFunc("/api/count", respHandlerCount)
+	* http.HandleFunc("/api/status", respHandlerStatus)
+	* http.HandleFunc("/api/get-qr", respHandlerGenQR)
+	* http.HandleFunc("/api/gen-qr", respHandlerGenQR)
+	* http.HandleFunc("/api/get-auth", respHandlerGetAuth)
+	* http.HandleFunc("/api/auth-token-valid", respHandlerAuthTokenValid)
+	* http.Handle("/", http.FileServer(http.Dir(gCfg.Dir)))
+"go test" to validate stuff in code.
