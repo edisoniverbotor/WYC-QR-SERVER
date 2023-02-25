@@ -11,5 +11,6 @@ require (
 	github.com/pschlump/jsonSyntaxErrorLib v1.0.1
 	github.com/pschlump/radix.v2 v0.2.1
 	github.com/pschlump/uuid v1.0.3
-	golang.org/x/crypto v0.0.0-20200406173513-056763e48d71
+	github.com/stretchr/testify v1.8.1 // indirect
+	golang.org/x/crypto v0.1.0
 )
